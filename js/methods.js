@@ -475,6 +475,8 @@ var premiumApi = {
     document.getElementById("viewAllExport").textContent =
       "Download Export Usage Query API Data";
   },
+
+/*  
   logIn: function () {
     console.log("logIn");
     let clientId = a;
@@ -483,11 +485,32 @@ var premiumApi = {
       "https://autodesk-forge.github.io/forge-premium-report/"
     );
     window.open(
-      `https://developer.api.autodesk.com/authentication/v1/authorize` +
+      `https://developer.api.autodesk.com/authentication/v2/authorize` +
         `?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes}`,
       "_self"
     );
   },
+  */
+
+logIn: function () {
+  console.log("logIn");
+
+  const clientId = a; // your Forge Client ID
+  const redirectUri = "http://localhost:5500";
+  const scopes = "data:read data:write bucket:read";
+
+  const authUrl =
+    "https://developer.api.autodesk.com/authentication/v2/authorize" +
+    `?response_type=code` +
+    `&client_id=${clientId}` +
+    `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+    `&scope=${encodeURIComponent(scopes)}`;
+
+  window.location.href = authUrl;
+},
+
+
+
   showInfo: function (text) {
     let logInButton = document.getElementById("Info");
     logInButton.value = text;
